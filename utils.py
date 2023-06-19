@@ -29,12 +29,12 @@ def get_formatted_data(data):
     for row in data:
         date = datetime.datetime.strptime(row['date'], '%Y-%m-%dT%H:%M:%S.%f').strftime('%d.%m.%Y')
         description = row['description']
-        recipient = f"{row['to'].split()[0]} **{row['to'][-4]}"
+        recipient = f"{row['to'].split()[0]} **{row['to'][-4:]}"
         operations_amount = f"{row['operationAmount']['amount']} {row['operationAmount']['currency']['name']}"
         if "from" in row:
             sender = row["from"].split()
             from_bill = sender.pop(-1)
-            from_bill = f"{from_bill[:4]} {from_bill[4:6]}** **** {from_bill[-4]}"
+            from_bill = f"{from_bill[:4]} {from_bill[4:6]}** **** {from_bill[-4:]}"
             from_info = " ".join(sender)
         else:
             from_info, from_bill = "", ""
